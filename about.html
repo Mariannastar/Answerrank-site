@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About AnswerRank — SEO & AEO Agency for Founders</title>
+<meta name="description" content="Why AnswerRank exists, how our approach differs from traditional SEO agencies, and what we stand for.">
+<link rel="icon" href="images/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap');
+/* ============================================
+   ANSWERRANK — DESIGN TOKENS
+   ============================================ */
+:root {
+  --purple: #7B2FBE;
+  --purple-dark: #6B25A8;
+  --cyan: #3ECFCF;
+  --charcoal: #1A1A2E;
+  --lavender: #F3EEFF;
+  --cyan-tint: #E0FAFA;
+  --white: #FFFFFF;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --max: 1120px;
+  --radius: 16px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--charcoal);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  margin: 0 0 .5em;
+  letter-spacing: -0.01em;
+}
+h1 { font-size: clamp(2.1rem, 4.2vw, 3.4rem); font-weight: 700; }
+h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; }
+h3 { font-size: 1.25rem; font-weight: 600; }
+p { margin: 0 0 1em; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+ul { padding-left: 1.2em; margin: 0 0 1em; }
+li { margin-bottom: .5em; }
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.section { padding: 88px 0; }
+.section--tight { padding: 56px 0; }
+.bg-white { background: var(--white); }
+.bg-lavender { background: var(--lavender); }
+.bg-charcoal { background: var(--charcoal); color: var(--white); }
+.bg-purple { background: var(--purple); color: var(--white); }
+.bg-cyan-tint { background: var(--cyan-tint); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+.eyebrow::before { content: "//"; color: var(--purple); }
+.bg-charcoal .eyebrow::before, .bg-purple .eyebrow::before { color: var(--cyan); }
+
+/* ============================================
+   SIGNATURE ELEMENT: the Answer Block
+   Mirrors the doc's own "AEO answer block" markers —
+   the sentence written so an AI can lift it whole.
+   ============================================ */
+.answer-block {
+  position: relative;
+  background: var(--cyan-tint);
+  border-radius: var(--radius);
+  padding: 28px 28px 26px 30px;
+  margin: 28px 0 32px;
+  border-left: 3px solid var(--cyan);
+}
+.answer-block__tag {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .08em;
+  color: var(--purple);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.answer-block p {
+  font-size: 1.08rem;
+  font-weight: 500;
+  color: var(--charcoal);
+  margin: 0;
+}
+.bg-charcoal .answer-block,
+.bg-purple .answer-block { background: rgba(255,255,255,.1); border-left-color: var(--cyan); }
+.bg-charcoal .answer-block p, .bg-purple .answer-block p { color: var(--white); }
+.bg-charcoal .answer-block__tag, .bg-purple .answer-block__tag { color: var(--cyan); }
+
+/* ============================================
+   NAV
+   ============================================ */
+.nav {
+  background: var(--charcoal);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 78px;
+}
+.nav__logo { display: flex; align-items: center; gap: 10px; }
+.nav__logo img { height: 30px; width: auto; }
+.logo-svg-wrap { display: inline-flex; height: 30px; width: 30px; flex-shrink: 0; }
+.logo-svg-wrap svg { height: 100%; width: 100%; display: block; }
+.nav__logo span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--white);
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav__links a {
+  color: var(--white);
+  font-size: .95rem;
+  font-weight: 500;
+  transition: color .15s ease;
+}
+.nav__links a:hover { color: var(--cyan); }
+.nav__cta { display: none; }
+.nav__toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+@media (max-width: 860px) {
+  .nav__links { display: none; }
+  .nav__toggle { display: block; }
+  .nav__links.is-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 78px;
+    left: 16px;
+    right: 16px;
+    background: var(--charcoal);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    padding: 10px 8px;
+    gap: 2px;
+    box-shadow: 0 16px 40px rgba(0,0,0,.4);
+  }
+  .nav__links.is-open li { width: 100%; }
+  .nav__links.is-open li a {
+    display: block;
+    padding: 14px 16px;
+    border-radius: 10px;
+  }
+  .nav__links.is-open li:not(:last-child) a:not(.btn) {
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    border-radius: 0;
+  }
+  .nav__links.is-open a:hover { background: rgba(255,255,255,.06); }
+  .nav__links.is-open .btn { margin-top: 8px; width: 100%; justify-content: center; }
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .95rem;
+  padding: 14px 26px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform .12s ease, background .15s ease, color .15s ease;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn--primary { background: var(--purple); color: var(--white); }
+.btn--primary:hover { background: var(--purple-dark); }
+.btn--outline-white { background: transparent; color: var(--white); border-color: var(--white); }
+.btn--outline-white:hover { background: var(--white); color: var(--charcoal); }
+.btn--outline-purple { background: transparent; color: var(--purple); border-color: var(--purple); }
+.btn--outline-purple:hover { background: var(--purple); color: var(--white); }
+.btn--small { padding: 10px 20px; font-size: .85rem; }
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  padding: 96px 0 76px;
+}
+.hero__cta-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 34px; }
+.hero__sub { max-width: 640px; font-size: 1.08rem; }
+.hero--split { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+@media (max-width: 900px) { .hero--split { grid-template-columns: 1fr; } }
+
+.stat-mark { color: var(--cyan); }
+.bg-white .stat-mark, .bg-lavender .stat-mark { color: var(--purple); }
+
+.hl-underline {
+  color: var(--cyan);
+  border-bottom: 3px solid var(--cyan);
+  padding-bottom: 2px;
+}
+.trust-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,.12);
+  margin: 8px 0 24px;
+}
+.cite {
+  font-size: .78em;
+  opacity: .55;
+  font-weight: 400;
+}
+
+/* ============================================
+   SOCIAL PROOF
+   ============================================ */
+.proof {
+  border-left: 4px solid var(--cyan);
+  background: var(--white);
+  padding: 22px 28px;
+}
+.proof p { margin: 0; font-weight: 500; }
+
+.proof-stats { display: flex; align-items: center; gap: 40px; margin-top: 32px; flex-wrap: wrap; }
+.proof-stats__item { display: flex; align-items: baseline; gap: 12px; }
+.proof-stats__num { font-family: var(--font-display); font-weight: 700; font-size: 2rem; color: var(--white); letter-spacing: -0.01em; }
+.proof-stats__label { color: rgba(255,255,255,.72); font-size: .95rem; }
+.proof-stats__divider { width: 1px; height: 30px; background: rgba(255,255,255,.18); }
+@media (max-width: 700px) {
+  .proof-stats { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .proof-stats__divider { display: none; }
+}
+
+/* ============================================
+   CARDS / GRIDS
+   ============================================ */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+@media (max-width: 860px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: 0 2px 18px rgba(26,26,46,.06);
+  display: flex;
+  flex-direction: column;
+}
+.card__label { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .08em; color: var(--purple); text-transform: uppercase; margin-bottom: 10px; }
+.card__price { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--purple); margin: 10px 0 16px; }
+.card__link { margin-top: auto; padding-top: 16px; color: var(--cyan-tint); }
+.card a.card__link-text { color: var(--charcoal); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.card a.card__link-text::after { content: "→"; color: var(--cyan); transition: transform .15s ease; }
+.card a.card__link-text:hover::after { transform: translateX(4px); }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+@media (max-width: 900px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+.step__num {
+  font-family: var(--font-mono);
+  color: var(--cyan);
+  font-size: .85rem;
+  letter-spacing: .05em;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Stat row */
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin: 40px 0; }
+@media (max-width: 700px) { .stats-row { grid-template-columns: 1fr; } }
+.stat { text-align: left; }
+.stat .num { font-family: var(--font-display); font-size: 2.6rem; font-weight: 700; color: var(--purple); display: block; }
+.bg-charcoal .stat .num, .bg-purple .stat .num { color: var(--cyan); }
+.stat .cap { font-size: .92rem; color: inherit; opacity: .85; }
+
+/* Comparison table */
+.compare {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.compare th, .compare td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--lavender);
+  font-size: .95rem;
+}
+.compare th { font-family: var(--font-display); background: var(--charcoal); color: var(--white); font-weight: 600; }
+.compare td:first-child { font-weight: 600; }
+.compare .yes { color: var(--purple); font-weight: 700; }
+.compare .no { color: #c9c4d6; }
+
+/* FAQ */
+details.faq {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  border: 1px solid var(--lavender);
+}
+details.faq summary {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--purple);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after {
+  content: "+";
+  font-size: 1.4rem;
+  color: var(--cyan);
+  font-weight: 400;
+  margin-left: 12px;
+}
+details.faq[open] summary::after { content: "–"; }
+details.faq p { margin-top: 14px; }
+
+/* Values / list marks */
+.value-block { margin-bottom: 28px; }
+.value-block h3 { color: var(--purple); }
+
+/* Blog cards */
+.post-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 26px;
+  border: 1px solid var(--lavender);
+}
+.post-card__cat {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  color: var(--purple);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* Footer */
+.footer {
+  background: var(--charcoal);
+  color: var(--white);
+  padding: 64px 0 32px;
+}
+.footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+@media (max-width: 700px) { .footer__grid { grid-template-columns: 1fr; } }
+.footer h4 { font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; color: var(--cyan); font-family: var(--font-mono); }
+.footer a { opacity: .85; }
+.footer a:hover { color: var(--cyan); opacity: 1; }
+.footer__bottom {
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding-top: 24px;
+  font-size: .85rem;
+  opacity: .7;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Forms */
+.form { background: var(--white); border-radius: var(--radius); padding: 32px; box-shadow: 0 2px 18px rgba(26,26,46,.06); }
+.form label { display: block; font-weight: 600; font-size: .9rem; margin-bottom: 6px; }
+.form .field { margin-bottom: 18px; }
+.form input, .form select, .form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d9d2ec;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: .95rem;
+  background: var(--lavender);
+}
+.form input:focus, .form select:focus, .form textarea:focus {
+  outline: 2px solid var(--cyan);
+  outline-offset: 1px;
+}
+
+/* Utility */
+.center { text-align: center; }
+.muted { opacity: .8; }
+.small { font-size: .88rem; }
+.mt-0 { margin-top: 0; }
+.gap-note { font-family: var(--font-mono); font-size: .78rem; color: var(--purple); }
+
+/* Focus visibility */
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+
+</style>
+</head>
+<body>
+
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav__logo" href="index.html">
+      <span class="logo-svg-wrap"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AnswerRank logo mark">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7B2FBE"/>
+      <stop offset="100%" stop-color="#3ECFCF"/>
+    </linearGradient>
+  </defs>
+  <!-- three ascending rank bars -->
+  <rect x="14" y="78" width="16" height="34" rx="4" fill="url(#grad)"/>
+  <rect x="38" y="58" width="16" height="54" rx="4" fill="url(#grad)"/>
+  <rect x="62" y="34" width="16" height="78" rx="4" fill="url(#grad)"/>
+  <!-- answer bubble growing out of the tallest bar -->
+  <path d="M84 34
+           h30
+           a12 12 0 0 1 12 12
+           v22
+           a12 12 0 0 1 -12 12
+           h-6
+           l-8 10
+           v-10
+           h-16
+           a12 12 0 0 1 -12 -12
+           v-22
+           a12 12 0 0 1 12 -12
+           z"
+        fill="#3ECFCF"/>
+  <circle cx="94" cy="57" r="3" fill="#1A1A2E"/>
+  <circle cx="106" cy="57" r="3" fill="#1A1A2E"/>
+  <circle cx="118" cy="57" r="3" fill="#1A1A2E"/>
+</svg></span>
+      <span>AnswerRank</span>
+    </a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="how-it-works.html">How It Works</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="aeo-audit.html" class="btn btn--primary btn--small">Get Your Free Audit</a></li>
+    </ul>
+    <button class="nav__toggle" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<header class="hero bg-charcoal">
+  <div class="wrap">
+    <span class="eyebrow">Our story</span>
+    <h1>What is AnswerRank, and why was it built?</h1>
+    <div class="answer-block" style="max-width:700px;">
+      <span class="answer-block__tag">What AnswerRank is</span>
+      <p>AnswerRank is an SEO and AEO agency built for solo founders navigating the shift from Google-only search to AI-powered discovery. We help you rank on Google and get cited in AI answers on ChatGPT, Perplexity, and Google AI Mode, using one integrated strategy built specifically for people running lean.</p>
+    </div>
+  </div>
+</header>
+
+<section class="section bg-white">
+  <div class="wrap">
+    <span class="eyebrow">The story</span>
+    <h2>Why AnswerRank exists</h2>
+    <p>In 2024, something shifted in how people find answers online.</p>
+    <p>Quietly at first, then undeniably. Millions of potential customers stopped typing into Google and started asking ChatGPT, Perplexity, and Google AI instead. They stopped getting a list of links. They started getting a direct answer, one that named specific businesses, recommended specific brands, and built trust before a single click happened.</p>
+    <p>The businesses showing up in those AI answers weren't necessarily the biggest or the best-funded. They were the ones whose content was structured in a way AI systems could read, trust, and extract. The ones whose pages answered questions directly. The ones who understood the new rules.</p>
+    <p>Most solo founders hadn't figured this out. Most SEO advice was still written for a world that had already changed. And most agencies were either ignoring AI search entirely or treating it as a bolt-on to their existing Google-only workflow.</p>
+    <p>AnswerRank was built to close that gap, specifically for solo founders who move fast, run lean, and need clarity over complexity.</p>
+    <p>Not to replace SEO. SEO still matters and always will. But to build the layer the AI era demands: content that earns citations because it's genuinely structured to be found, trusted, and recommended by AI systems.</p>
+  </div>
+</section>
+
+<section class="section bg-lavender">
+  <div class="wrap">
+    <span class="eyebrow">Our approach</span>
+    <h2>What makes AnswerRank's approach different?</h2>
+    <div class="answer-block">
+      <span class="answer-block__tag">AnswerRank's methodology</span>
+      <p>AnswerRank's approach is research-backed and built for founders who don't have time for theory. Every recommendation draws on documented research, query fan-out studies, AI citation pattern analysis, Princeton's GEO research, and BrightEdge data, combined with real citation data from active client work.</p>
+    </div>
+    <p>We track which content structures earn citations. We monitor which schema types perform across different AI platforms. We test what actually moves the needle for lean operations, not enterprise content teams with unlimited budgets.</p>
+  </div>
+</section>
+
+<section class="section bg-white">
+  <div class="wrap">
+    <span class="eyebrow">Values</span>
+    <h2 style="margin-bottom:32px;">What we stand for</h2>
+
+    <div class="value-block">
+      <h3>Honest over hype</h3>
+      <p>AEO is real and it matters. But we will never promise results we cannot deliver or timelines that aren't realistic. If we don't think AnswerRank is the right fit for your business right now, we'll tell you in the free audit rather than sell you something you don't need.</p>
+    </div>
+    <div class="value-block">
+      <h3>Specific over vague</h3>
+      <p>We don't give advice like "improve your content quality." We give advice like "rewrite the first sentence of every section so it directly answers the heading question, and here's exactly why that earns AI citations." Every recommendation comes with a specific action and a clear reason.</p>
+    </div>
+    <div class="value-block">
+      <h3>Your results are our reputation</h3>
+      <p>AnswerRank is an early-stage agency building its name on client outcomes. Every case study we publish will be a real business with real numbers. That's the only kind of proof that matters, and it's the only kind we'll ever claim.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-purple">
+  <div class="wrap center">
+    <a href="contact.html" class="btn" style="background:var(--white);color:var(--purple);">Work With Us →</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <a class="nav__logo" href="index.html" style="margin-bottom:12px;">
+          <span class="logo-svg-wrap" style="height:28px;"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AnswerRank logo mark">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7B2FBE"/>
+      <stop offset="100%" stop-color="#3ECFCF"/>
+    </linearGradient>
+  </defs>
+  <!-- three ascending rank bars -->
+  <rect x="14" y="78" width="16" height="34" rx="4" fill="url(#grad)"/>
+  <rect x="38" y="58" width="16" height="54" rx="4" fill="url(#grad)"/>
+  <rect x="62" y="34" width="16" height="78" rx="4" fill="url(#grad)"/>
+  <!-- answer bubble growing out of the tallest bar -->
+  <path d="M84 34
+           h30
+           a12 12 0 0 1 12 12
+           v22
+           a12 12 0 0 1 -12 12
+           h-6
+           l-8 10
+           v-10
+           h-16
+           a12 12 0 0 1 -12 -12
+           v-22
+           a12 12 0 0 1 12 -12
+           z"
+        fill="#3ECFCF"/>
+  <circle cx="94" cy="57" r="3" fill="#1A1A2E"/>
+  <circle cx="106" cy="57" r="3" fill="#1A1A2E"/>
+  <circle cx="118" cy="57" r="3" fill="#1A1A2E"/>
+</svg></span>
+          <span>AnswerRank</span>
+        </a>
+        <p class="muted small">Rank on Google. Show up in AI. Get found everywhere.</p>
+        <p class="small"><a href="mailto:hello@answerrank.co">hello@answerrank.co</a></p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <p class="small"><a href="services.html">Services</a></p>
+        <p class="small"><a href="how-it-works.html">How It Works</a></p>
+        <p class="small"><a href="about.html">About</a></p>
+        <p class="small"><a href="blog.html">Blog</a></p>
+        <p class="small"><a href="contact.html">Contact</a></p>
+      </div>
+      <div>
+        <h4>Get Started</h4>
+        <p class="small"><a href="aeo-audit.html">Free AEO Audit</a></p>
+        <p class="small"><a href="services.html">Full AEO Audit</a></p>
+        <p class="small"><a href="services.html">Content Strategy</a></p>
+        <p class="small"><a href="services.html">Monthly Retainer</a></p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 AnswerRank. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+    document.getElementById('navToggle').addEventListener('click', function () {
+    var links = document.getElementById('navLinks');
+    var isOpen = links.classList.toggle('is-open');
+    this.textContent = isOpen ? '✕' : '☰';
+  });
+</script>
+</body>
+</html>
